@@ -1,0 +1,107 @@
+.stage{
+    width: 360px;
+    height: 640px;
+    background-color: green;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    .start{
+        width: 100%;
+        height: 100%;
+        background: url("../images/background-start.png") no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        transition: all 0.3s;
+        button{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            line-height: 30px;
+            border-radius: 15px;
+            outline: none;
+        }
+    }
+    .gameScene{
+        width: 100%;
+        height: 100%;
+        background-color: blue;
+        background: url('../images/background-game.png');
+        background-size: 100% 100%;
+        position: absolute;
+        left: 360px;
+        top: 0;
+        transition: all 0.3s;
+        .ranking{
+            position: absolute;
+            left: 50%;         
+            top: -100px;
+            width: 50%;
+            margin-left: -25%;
+            transition: all 0.3s;
+            tr{
+                th,td{
+                    border: 1px solid black;
+                    text-align: center;
+                }
+            }
+        }
+        .deathButtons{
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transition: all 0.3s;
+            button{
+                display: block;
+                margin: 10px auto;
+                padding: 0 20px;
+                line-height: 30px;
+                border-radius: 15px;
+                outline: none;
+            }
+        }
+        img{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .score{
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 30px;
+            margin: 5px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+        }
+    }
+    &.play{
+        .start{
+            left: -360px;
+        }
+        .gameScene{
+            left: 0;
+        }
+    }
+    &.play.paused{
+        .ranking{
+            top: 100px;
+        }
+    }
+    &.play.death{
+        .ranking{
+            margin-top: 100px;
+        }
+        .deathButtons{
+            bottom: 100px;
+        }
+    }
+}
