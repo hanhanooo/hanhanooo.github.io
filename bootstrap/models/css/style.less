@@ -41,13 +41,21 @@ a:hover{
                 }
             }
         }
-        .collapse{
-            .navbar-nav{
+        .navbar-collapse{
+            border:none;
+            .nav{
                 li{
+                    text-align: center;
                     &.active{
                         a{
                             background: none;
                             color:@themeRed;
+                            &.home{
+                                color:blue;
+                                @media (min-width:768px){
+                                    color: @themeRed;
+                                }
+                            }
                         }
                     }
                     a{
@@ -100,12 +108,12 @@ a:hover{
                 }
             }
             &.in{
-                border:none;
                 text-align: center;
                 li{
                     a{
                         &.home{
                             color: blue;
+                            transition: none;
                         }                        
                     }
                 }
@@ -346,9 +354,6 @@ a:hover{
                     }
                 }
             }
-            .blog-title{
-
-            }
             .list{
                 a{
                     font-size: 15px;
@@ -407,12 +412,36 @@ a:hover{
             color: #999;
         }
 
-        img{
-            width: 100%;
-            margin: 15px 0;
-            padding: 0 15px;
-            @media (min-width:768px){
-                padding: 0;
+        .row{
+            img{
+                width: 100%;
+                margin: 15px 0;
+                padding: 0 15px;
+                @media (min-width:768px){
+                    padding: 0;
+                }
+            }
+        }
+
+        .modal-dialog{
+            max-width: 430px;
+            margin: auto;
+            // left: 50%;
+            top: 50%;
+            // transform: translate(-50%,-50%);
+            transform: translateY(-50%);
+
+            .modal-content{
+                img{
+                    padding: 48px 32px;
+                    display: inline-block;
+                }
+                button.close{
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    font-size: 28px;
+                }
             }
         }
     }
