@@ -1,0 +1,300 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+}
+.stage {
+    height: 100%;
+    /* background-color: darkturquoise; */
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    /* align-content: center; */
+    flex-direction: column;
+    .bigBox {
+        margin: 50px 0;
+        // border-bottom: 1px solid gray;
+
+        h1 {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 20px;
+            color: rgba(65, 65, 65, 0.644);
+        }
+
+        .item {
+            margin: 0 50px;
+            display: inline-block;
+            transition: all 0.3s;
+            .title {
+                text-align: center;
+                transition: inherit;
+                opacity: 0;
+                h3 {
+                    color: lightseagreen;
+                    font-size: 26px;
+                    margin: 0;
+                    transition: inherit;
+                }
+                h5 {
+                    color: lightsteelblue;
+                    margin: 0;
+                    transition: all 0.45s;
+                }
+            }
+            .circle {
+                width: 200px;
+                height: 200px;
+                // background-color: rgba(255, 20, 145, 0.322);
+                position: relative;
+                overflow: hidden;
+                border-radius: 50%;
+                transition: inherit;
+            }
+            .shadow {
+                width: 200px;
+                height: 20px;
+                /* background-color: rgba(255, 127, 80, 0.171); */
+                position: relative;
+                top: -50px;
+                transition: inherit;
+                box-shadow: 0px 31px 19px -2px #e0e8f9;
+                z-index: -1;
+            }
+
+            &:hover {
+                cursor: pointer;
+                .title {
+                    opacity: 1;
+                    h3 {
+                        transform: translateY(-20px);
+                    }
+                    h5 {
+                        transform: translateY(-20px);
+                    }
+                }
+                .circle {
+                    transform: scale(1.1);
+                }
+                .shadow {
+                    transform: scale(1.1);
+                    /* top: -30px; */
+                    transform: translateY(20px);
+                }
+            }
+        }
+
+        // 动画 背景图
+        &.anim {
+            .item {
+                .circle {
+                    .far {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        background-image: url(./img/pc1.png);
+                        // background-color: rgba(255, 118, 77, 0.63);
+                    }
+                    .near {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        background-image: url(./img/pc3.png);
+                        // background-color: rgba(57, 126, 253, 0.63);
+                        z-index: 9;
+                    }
+                    .vehicle {
+                        position: absolute;
+                        right: 100px;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        background-image: url(./img/pc2.png);
+                        // background-color: rgba(144, 238, 144, 0.459);
+                        z-index: 99;
+                    }
+                    &.bus {
+                        .far {
+                            background-image: url(./img/pc4.png);
+                        }
+                        .near {
+                            background-image: url(./img/pc5.png);
+                        }
+                        .vehicle {
+                            background-image: url(./img/pc6.png);
+                        }
+                    }
+                    &.plane {
+                        .far {
+                            background-image: url(./img/pc7.png);
+                        }
+                        .near {
+                            background-image: url(./img/pc8.png);
+                            left: -100px;
+                        }
+                        .vehicle {
+                            background-image: url(./img/pc9.png);
+                            right: 0px;
+                        }
+                    }
+                }
+                &:hover .circle {
+                    .far {
+                        // animation-name: far;
+                        // animation-duration: 5s;
+                        // animation-timing-function: linear;
+                        // animation-delay: 0s;
+                        // animation-direction: normal;
+                        // animation-fill-mode: forwards;
+                        animation: far 5s linear 0s 1 normal forwards;
+                    }
+                    .near {
+                        animation: near 5s linear 0s 1 normal forwards;
+                    }
+                    &.train .vehicle {
+                        animation: train 5s linear 0s 1 normal forwards;
+                    }
+                    &.bus .vehicle {
+                        animation: bus 5s linear 0s 1 normal forwards;
+                    }
+                    &.plane .vehicle {
+                        animation: plane 5s linear 0s 1 normal forwards;
+                    }
+                }
+            }
+        }
+
+        // 移动
+        &.tran {
+            .item {
+                .circle {
+                    transition: all 0.2s linear;
+                    .far {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        transition: inherit;
+                    }
+                    .near {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        transition: inherit;
+                    }
+                    .vehicle {
+                        position: absolute;
+                        right: 100px;
+                        top: 0;
+                        width: 600px;
+                        height: 200px;
+                        transition: inherit;
+                    }
+                    &.plane{
+                        .vehicle{
+                            right: 0px;
+                        }
+                    }
+                }
+                &:hover {
+                    .circle {
+                        // transform: scale(1.1);
+                        .far {
+                            transition: all 5s linear;
+                        }
+                        .near {
+                            transition: all 5s linear;
+                        }
+                        .vehicle {
+                            transition: all 5s linear;
+                        }
+                        &.train {
+                            .far {
+                                transform: translateX(-100px);
+                            }
+                            .near {
+                                transform: translateX(-300px);
+                            }
+                            .vehicle {
+                                transform: translateX(500px);
+                            }
+                        }
+                        &.bus {
+                            .far {
+                                transform: translateX(-100px);
+                            }
+                            .near {
+                                transform: translateX(-300px);
+                            }
+                            .vehicle {
+                                transform: translateX(300px);
+                            }
+                        }
+                        &.plane {
+                            .far {
+                                transform: translateX(-100px);
+                            }
+                            .near {
+                                transform: translateX(-300px);
+                            }
+                            .vehicle {
+                                transform: translateX(250px);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes far {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100px);
+    }
+}
+@keyframes near {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-300px);
+    }
+}
+@keyframes train {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(500px);
+    }
+}
+@keyframes bus {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(350px);
+    }
+}
+@keyframes plane {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(300px);
+    }
+}

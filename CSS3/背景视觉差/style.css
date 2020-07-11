@@ -1,0 +1,252 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+}
+.stage {
+  height: 100%;
+  /* background-color: darkturquoise; */
+  display: flex;
+  align-items: center;
+  /* align-content: center; */
+  flex-direction: column;
+}
+.stage .bigBox {
+  margin: 50px 0;
+}
+.stage .bigBox h1 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  color: rgba(65, 65, 65, 0.644);
+}
+.stage .bigBox .item {
+  margin: 0 50px;
+  display: inline-block;
+  transition: all 0.3s;
+}
+.stage .bigBox .item .title {
+  text-align: center;
+  transition: inherit;
+  opacity: 0;
+}
+.stage .bigBox .item .title h3 {
+  color: lightseagreen;
+  font-size: 26px;
+  margin: 0;
+  transition: inherit;
+}
+.stage .bigBox .item .title h5 {
+  color: lightsteelblue;
+  margin: 0;
+  transition: all 0.45s;
+}
+.stage .bigBox .item .circle {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  transition: inherit;
+}
+.stage .bigBox .item .shadow {
+  width: 200px;
+  height: 20px;
+  /* background-color: rgba(255, 127, 80, 0.171); */
+  position: relative;
+  top: -50px;
+  transition: inherit;
+  box-shadow: 0px 31px 19px -2px #e0e8f9;
+  z-index: -1;
+}
+.stage .bigBox .item:hover {
+  cursor: pointer;
+}
+.stage .bigBox .item:hover .title {
+  opacity: 1;
+}
+.stage .bigBox .item:hover .title h3 {
+  transform: translateY(-20px);
+}
+.stage .bigBox .item:hover .title h5 {
+  transform: translateY(-20px);
+}
+.stage .bigBox .item:hover .circle {
+  transform: scale(1.1);
+}
+.stage .bigBox .item:hover .shadow {
+  transform: scale(1.1);
+  /* top: -30px; */
+  transform: translateY(20px);
+}
+.stage .bigBox.anim .item .circle .far {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  background-image: url(img/pc1.png);
+}
+.stage .bigBox.anim .item .circle .near {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  background-image: url(img/pc3.png);
+  z-index: 9;
+}
+.stage .bigBox.anim .item .circle .vehicle {
+  position: absolute;
+  right: 100px;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  background-image: url(img/pc2.png);
+  z-index: 99;
+}
+.stage .bigBox.anim .item .circle.bus .far {
+  background-image: url(img/pc4.png);
+}
+.stage .bigBox.anim .item .circle.bus .near {
+  background-image: url(img/pc5.png);
+}
+.stage .bigBox.anim .item .circle.bus .vehicle {
+  background-image: url(img/pc6.png);
+}
+.stage .bigBox.anim .item .circle.plane .far {
+  background-image: url(img/pc7.png);
+}
+.stage .bigBox.anim .item .circle.plane .near {
+  background-image: url(img/pc8.png);
+  left: -100px;
+}
+.stage .bigBox.anim .item .circle.plane .vehicle {
+  background-image: url(img/pc9.png);
+  right: 0px;
+}
+.stage .bigBox.anim .item:hover .circle .far {
+  animation: far 5s linear 0s 1 normal forwards;
+}
+.stage .bigBox.anim .item:hover .circle .near {
+  animation: near 5s linear 0s 1 normal forwards;
+}
+.stage .bigBox.anim .item:hover .circle.train .vehicle {
+  animation: train 5s linear 0s 1 normal forwards;
+}
+.stage .bigBox.anim .item:hover .circle.bus .vehicle {
+  animation: bus 5s linear 0s 1 normal forwards;
+}
+.stage .bigBox.anim .item:hover .circle.plane .vehicle {
+  animation: plane 5s linear 0s 1 normal forwards;
+}
+.stage .bigBox.tran .item .circle {
+  transition: all 0.2s linear;
+}
+.stage .bigBox.tran .item .circle .far {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  transition: inherit;
+}
+.stage .bigBox.tran .item .circle .near {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  transition: inherit;
+}
+.stage .bigBox.tran .item .circle .vehicle {
+  position: absolute;
+  right: 100px;
+  top: 0;
+  width: 600px;
+  height: 200px;
+  transition: inherit;
+}
+.stage .bigBox.tran .item .circle.plane .vehicle {
+  right: 0px;
+}
+.stage .bigBox.tran .item:hover .circle .far {
+  transition: all 5s linear;
+}
+.stage .bigBox.tran .item:hover .circle .near {
+  transition: all 5s linear;
+}
+.stage .bigBox.tran .item:hover .circle .vehicle {
+  transition: all 5s linear;
+}
+.stage .bigBox.tran .item:hover .circle.train .far {
+  transform: translateX(-100px);
+}
+.stage .bigBox.tran .item:hover .circle.train .near {
+  transform: translateX(-300px);
+}
+.stage .bigBox.tran .item:hover .circle.train .vehicle {
+  transform: translateX(500px);
+}
+.stage .bigBox.tran .item:hover .circle.bus .far {
+  transform: translateX(-100px);
+}
+.stage .bigBox.tran .item:hover .circle.bus .near {
+  transform: translateX(-300px);
+}
+.stage .bigBox.tran .item:hover .circle.bus .vehicle {
+  transform: translateX(300px);
+}
+.stage .bigBox.tran .item:hover .circle.plane .far {
+  transform: translateX(-100px);
+}
+.stage .bigBox.tran .item:hover .circle.plane .near {
+  transform: translateX(-300px);
+}
+.stage .bigBox.tran .item:hover .circle.plane .vehicle {
+  transform: translateX(250px);
+}
+@keyframes far {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+@keyframes near {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-300px);
+  }
+}
+@keyframes train {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(500px);
+  }
+}
+@keyframes bus {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(350px);
+  }
+}
+@keyframes plane {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(300px);
+  }
+}
+/*# sourceMappingURL=./style.css.map */
