@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .imgs{
+            float: left;
+            width: 80px;
+            margin-right: 10px;
+        }
+        .imgs img{
+            width: 80px;
+        }
+        .imgs img.selected{
+            border: 2px solid red;
+        }
+        .original{
+            position: relative;
+            float: left;
+            width: 300px;
+            height: 300px;
+        }
+        .original img{
+            width: 100%;
+        }
+        .original .mask{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(112, 112, 112, 0.5)
+        }
+        .zoom{
+            display: none;
+            float: left;
+            margin-left: 20px;
+            width: 400px;
+            height: 400px;
+            background-image: url("./img/0001.png");
+            background-repeat: no-repeat;
+            background-size: 200% auto;
+            background-position: 0px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="imgs">
+            <img src="./img/0001.png" alt="">
+            <img src="./img/0002.png" alt="">
+            <img src="./img/0003.png" alt="">
+            <img src="./img/0004.png" alt="">
+            <img src="./img/0005.png" alt="">
+        </div>
+        <div class="original">
+            <img src="./img/0001.png" alt="">
+            <div class="mask"></div>
+        </div>
+        <div class="zoom"></div>
+    </div>
+
+    <script>
+        var stage = document.getElementsByClassName("stage")[0];
+        var original = stage.getElementsByClassName("original")[0];
+        var originalImg = original.getElementsByTagName("img")[0];
+        var mask = original.getElementsByClassName("mask")[0];
+        var zoom = stage.getElementsByClassName("zoom")[0];
+        var imgsDiv = stage.getElementsByClassName("imgs")[0];
+        var imgs = imgsDiv.getElementsByTagName("img");
+
+        original.onmousemove = function(event){
+            // console.log(event);
+            var x = event.pageX -98;
+            var y = event.pageY -8;
+            // console.log(x,y)
+
+            //限制遮罩的范围 75-225
+            x = x < 75 ? 75 : x;
+            x = x > 225 ? 225 : x;
+            y = y < 75 ? 75 : y;
+            y = y > 225 ? 225 : y;
+
+            // 遮罩跟随鼠标移动 修正遮罩在鼠标中心位置
+            mask.style.left = x - 75 +"px";
+            mask.style.top = y -75 + "px";
+
+            // 右边图片的显示
+            zoom.style.backgroundPositionX = -(x-75)*(400/300)*2 +"px";
+            zoom.style.backgroundPositionY = -(y-75)*(400/300)*2 +"px";
+            
+            zoom.style.backgroundPositionX = -(x-75)*(400/150) +"px";
+            zoom.style.backgroundPositionY = -(y-75)*(400/150) +"px";
+
+        }
+
+        original.onmouseover = function(){
+            mask.style.display = "block";
+            zoom.style.display = "block";
+        }
+        original.onmouseout = function(){
+            mask.style.display = "none";
+            zoom.style.display = "none";
+        }
+
+
+        for(var i=0;i<imgs.length;i++){
+            imgs[i].xxx = i;
+            imgs[i].onclick = function(){
+                originalImg.src = this.src;
+                zoom.style.backgroundImage = "url(" + this.src + ")";
+                for(var j = 0;j<imgs.length;j++){
+                    if(j == this.xxx){
+                        this.classList.add("selected");
+                    }else{
+                        imgs[j].classList.remove("selected");
+                    }
+                }
+            }
+        }
+
+        // 默认选中第一张
+        imgs[0].onclick();
+
+    </script>
+</body>
+</html>

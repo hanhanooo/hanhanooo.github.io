@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            position: relative;
+            overflow: hidden;
+            width: 500px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background-color: aqua;
+        }
+        ul li{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            transition: all 0.5s;
+        }
+        ul li img{
+            display: block;
+            width: 100%;
+        }
+        ul li:nth-child(1){
+            position: relative;
+        }
+        /* ul li:nth-child(2){
+            left: 200px;
+        }
+        ul li:nth-child(3){
+            left: 300px;
+        }
+        ul li:nth-child(4){
+            left: 400px;
+        } */
+        ul li .mask{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: all 0.8s;
+            color: #fff;
+            font-size: 16px;
+            overflow: hidden;
+        }
+        ul li .mask.active{
+            height: 20%;
+            /* background-color: rgba(0, 0, 0, 0); */
+        }
+        h5,h6{
+            margin: 0;
+            padding: 0;
+        }
+        ul li .mask .info{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            margin-left: 20px;
+            transition: inherit;
+        }
+        ul li .mask .info h5{
+            font-size: 14px;
+        }
+        ul li .mask h5{
+            color:lightseagreen;
+        }
+        ul li .mask .desc{
+            position: absolute;
+            left: 100%;
+            bottom: 0;
+            width: 100%;
+            margin-left: 20px;
+            transition: inherit;
+        }
+        ul li .mask .desc h5{
+            font-size: 20px;
+        }
+        ul li .mask .desc h6{
+            font-size: 16px;
+        }
+        ul li .mask.active .info{
+            left: -100%;
+        }
+        ul li .mask.active .desc{
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <img src="./img/datouwang1.jpg" alt="">
+            <div class="mask active">
+                <div class="info">
+                    <h5>胜率</h5>
+                    <h6>NO.1</h6>
+                </div>
+                <div class="desc">
+                    <h6>墨子</h6>
+                    <h5>胜率NO.1</h5>
+                </div>
+            </div>
+        </li>
+        <li>
+            <img src="./img/datouwang2.jpg" alt="">
+            <div class="mask">
+                <div class="info">
+                    <h5>胜率</h5>
+                    <h6>NO.1</h6>
+                </div>
+                <div class="desc">
+                    <h6>墨子</h6>
+                    <h5>胜率NO.1</h5>
+                </div>            </div>
+        </li>
+        <li>
+            <img src="./img/datouwang3.jpg" alt="">
+            <div class="mask">
+                <div class="info">
+                    <h5>胜率</h5>
+                    <h6>NO.1</h6>
+                </div>
+                <div class="desc">
+                    <h6>墨子</h6>
+                    <h5>胜率NO.1</h5>
+                </div>            </div>
+        </li>
+        <li>
+            <img src="./img/datouwang4.jpg" alt="">
+            <div class="mask">
+                <div class="info">
+                    <h5>胜率</h5>
+                    <h6>NO.1</h6>
+                </div>
+                <div class="desc">
+                    <h6>墨子</h6>
+                    <h5>胜率NO.1</h5>
+                </div>            </div>
+        </li>
+        <li>
+            <img src="./img/datouwang5.jpg" alt="">
+            <div class="mask">
+                <div class="info">
+                    <h5>胜率</h5>
+                    <h6>NO.1</h6>
+                </div>
+                <div class="desc">
+                    <h6>墨子</h6>
+                    <h5>胜率NO.1</h5>
+                </div>            </div>
+        </li>
+    </ul>
+
+    <script>
+        var lis = document.getElementsByTagName("li");
+        var masks = document.getElementsByClassName("mask");
+
+        function show(index){
+            for(var i =0;i<lis.length;i++){
+                if(i<=index){
+                    lis[i].style.left = i*(500-200)/(lis.length-1) + "px";
+                }else{
+                    lis[i].style.left = 200 + (i-1)*(500-200)/(lis.length-1) + "px";
+                }
+                // 遮罩
+                if(i == index){
+                    masks[i].classList.add("active");
+                }else{
+                    masks[i].classList.remove("active");
+                }
+            }
+        }
+
+        // for(var i=0;i<lis.length;i++){
+        //     lis[i].index = i;
+        //     lis[i].onclick = function(){
+        //         show(this.index);
+        //     }
+        // }
+
+        for(var i=0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onmousemove = function(){
+                show(this.index);
+            }
+        }
+
+        show(0);
+
+    </script>
+</body>
+</html>

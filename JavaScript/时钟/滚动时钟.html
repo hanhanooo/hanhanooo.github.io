@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+        ul{
+            position: relative;
+            top: 50%;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            width: 400px;
+            /* overflow: hidden; */
+        }
+        ul li{
+            float: left;
+            margin-top: 0px;
+        }
+        ul li div{
+            width: 50px;
+            height: 100px;
+            font-size: 60px;
+            text-align: center;
+            color: #5a5a5a;
+        }
+        ul li div.active{
+            color: white;
+        }
+        ul li div.near{
+            color: #949494;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+        </li>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </li>
+        <li>
+            <div>:</div>
+        </li>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+        </li>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </li>
+        <li>
+            <div>:</div>
+        </li>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+        </li>
+        <li class="column">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </li>
+    </ul>
+
+    <script>
+        var columns = document.querySelectorAll("li.column")
+
+        //补零
+        function buLin(n){
+            if(n<10){
+                return "0"+n;
+            }else{
+                return n.toString();
+            }
+        }
+
+        setInterval(function(){
+            var d = new Date();
+            var h =buLin(d.getHours());
+            var m =buLin(d.getMinutes());
+            var s =buLin(d.getSeconds());
+
+            var arr = [];
+            arr = arr.concat(h.split(''),m.split(''),s.split(''));
+            
+            arr.forEach(function(element,index){
+                columns[index].style.marginTop = element * -100 +"px";
+                console.log(typeof element)
+                for(var i=0;i<columns[index].children.length;i++){
+                    if(i == element){
+                        columns[index].children.item(i).classList.add("active");
+                        columns[index].children.item(i).classList.remove("near");
+                    }else if(Number(element) == i+1 ||Number(element) == i-1){
+                        columns[index].children.item(i).classList.add("near");
+                        columns[index].children.item(i).classList.remove("active");
+                    }else{
+                        columns[index].children.item(i).className = '';
+                    }
+                }
+            })
+        },1000)
+
+    </script>
+</body>
+
+</html>

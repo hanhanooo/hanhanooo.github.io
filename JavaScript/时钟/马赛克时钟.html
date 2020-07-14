@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .stage .time,
+        .dot {
+            float: left;
+
+        }
+
+        .stage .line {
+            font-size: 0;
+
+        }
+
+        .stage .line span {
+            display: inline-block;
+            margin: 1px;
+            width: 30px;
+            height: 30px;
+            background-color: #dbdbdb;
+            border-radius: 8px;
+        }
+
+        .stage .line span.active {
+            background-color: black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <!-- <div class="time">
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="line">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div> -->
+    </div>
+    <script>
+
+        var stage = document.querySelector(".stage")
+
+        for (var k = 0; k < 8; k++) {
+            var time = document.createElement("div");
+            if (k == 2 || k == 5) {
+                time.classList.add("dot");
+            } else {
+                time.classList.add("time");
+            }
+            for (j = 0; j < 7; j++) {
+                var line = document.createElement("div");
+                line.classList.add("line");
+                for (var i = 0; i < 5; i++) {
+                    var span = document.createElement("span");
+                    line.appendChild(span);
+                }
+                time.appendChild(line);
+            }
+            time.appendChild(line);
+            stage.appendChild(time);
+        }
+
+        var spans = document.querySelectorAll(".stage .time .line span")
+        var dots = document.querySelectorAll(".stage .dot .line span")
+        var arrs = new Array();
+        var index = 0;
+
+
+        var zero = [[0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var one = [[0, 0, 1, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 1, 1, 1, 0]]
+        var two = [[0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [0, 0, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 0, 0], [1, 1, 1, 1, 1]]
+        var three = [[0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [0, 0, 0, 0, 1], [0, 1, 1, 1, 0], [0, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var four = [[0, 0, 0, 1, 0], [0, 0, 1, 1, 0], [0, 1, 0, 1, 0], [1, 0, 0, 1, 0], [1, 1, 1, 1, 1], [0, 0, 0, 1, 0], [0, 0, 0, 1, 0]]
+        var five = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 1, 1, 0], [0, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var six = [[0, 0, 1, 1, 0], [0, 1, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 1, 1, 0], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var seven = [[1, 1, 1, 1, 1], [0, 0, 0, 0, 1], [0, 0, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 0, 0], [0, 1, 0, 0, 0], [0, 1, 0, 0, 0]]
+        var eight = [[0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var nine = [[0, 1, 1, 1, 0], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 1], [0, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 1, 1, 1, 0]]
+        var dot = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+
+        var nums = [zero, one, two, three, four, five, six, seven, eight, nine, dot]
+
+        for (var i = 0; i < 6; i++) {
+            arrs[i] = new Array();
+            for (var j = 0; j < 7; j++) {
+                arrs[i][j] = new Array();
+                for (var k = 0; k < 5; k++) {
+                    arrs[i][j][k] = spans[index];
+                    index++;
+                }
+            }
+        }
+
+        //冒号
+        var dotArr = new Array();
+        var temp = 0;
+        for (var i = 0; i < 2; i++) {
+            dotArr[i] = new Array();
+            for (var j = 0; j < 7; j++) {
+                dotArr[i][j] = new Array();
+                for (var k = 0; k < 5; k++) {
+                    dotArr[i][j][k] = dots[temp];
+                    temp++;
+                }
+            }
+        }
+
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 7; j++) {
+                for (var k = 0; k < 5; k++) {
+                    if (nums[10][j][k] == 1) {
+                        dotArr[i][j][k].classList.add("active")
+                    } else {
+                        dotArr[i][j][k].classList.remove("active")
+                    }
+                }
+            }
+        }
+
+
+        // spans = arr;
+        //补零
+        function buLin(n) {
+            if (n < 10) {
+                return "0" + n;
+            } else {
+                return n.toString();
+            }
+        }
+
+
+        setInterval(function () {
+            var d = new Date();
+            var h = buLin(d.getHours());
+            var m = buLin(d.getMinutes());
+            var s = buLin(d.getSeconds());
+            var tempArr = [];
+            tempArr = tempArr.concat(h.split(''), m.split(''), s.split(''));
+
+            for (var i = 0; i < 6; i++) {
+                for (var j = 0; j < 7; j++) {
+                    for (var k = 0; k < 5; k++) {
+                        if (nums[tempArr[i]][j][k] == 1) {
+                            arrs[i][j][k].classList.add("active")
+                        } else {
+                            arrs[i][j][k].classList.remove("active")
+                        }
+                    }
+                }
+            }
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

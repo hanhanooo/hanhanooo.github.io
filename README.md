@@ -1,5 +1,9 @@
 ## JavaScript 项目
 <a href = "./JavaScript/飞机大战/assets/index.html" target = "_blank">飞机大战</a>
+<a href = "./JavaScript/时钟/滚动时钟.html" target = "_blank">滚动时钟</a>
+<a href = "./JavaScript/时钟/马赛克时钟.html" target = "_blank">马赛克时钟</a>
+<a href = "./JavaScript/放大镜/放大镜.html" target = "_blank">放大镜</a>
+<a href = "./JavaScript/手风琴/手风琴.html" target = "_blank">手风琴</a>
 
 ---
 
