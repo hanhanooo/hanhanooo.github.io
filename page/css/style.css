@@ -1,0 +1,76 @@
+body {
+  background-color: #f5f5f5;
+}
+a {
+  color: #363636;
+}
+a:hover {
+  text-decoration: none;
+  color: #2828ce;
+}
+.welcome {
+  padding: 100px 0;
+  background-color: #ddd;
+}
+.welcome h1 {
+  font-size: 48px;
+  text-align: center;
+}
+section {
+  margin: 50px 0;
+}
+section .part-title {
+  text-align: center;
+  font-size: 38px;
+  font-weight: bold;
+  color: #333;
+  background-color: #cecece;
+  border-radius: 10px;
+  padding: 5px 0;
+  margin: 15px 0;
+}
+section .item-box {
+  background-color: #fcfcfc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 25px 40px;
+  box-shadow: 1px 1px 10px 0px #eee;
+  transition: all 0.3s;
+}
+@media (min-width: 768px) {
+  section .item-box {
+    margin: 20px 10px;
+  }
+}
+section .item-box .item-top {
+  height: 300px;
+  background-color: slateblue;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+@media (min-width: 768px) {
+  section .item-box .item-top {
+    height: 200px;
+  }
+}
+section .item-box .item-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0;
+}
+section .item-box:hover {
+  transform: scale(1.07);
+  box-shadow: 2px 2px 10px 10px #e3e3e3;
+}
+section.part-js .row div[class^="col"]:nth-child(1) .item-top {
+  background-image: url(../img/js-fjdz.jpg);
+}
+section.part-js .row div[class^="col"]:nth-child(2) .item-top {
+  background-image: url(../img/js-gdsz.jpg);
+}
+section.part-js .row div[class^="col"]:nth-child(3) .item-top {
+  background-image: url(../img/js-gdsz.jpg);
+}
+/*# sourceMappingURL=./style.css.map */

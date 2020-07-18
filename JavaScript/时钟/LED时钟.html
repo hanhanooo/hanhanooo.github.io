@@ -6,7 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .stage .time,
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:#282828;
+        }
+         .time,
         .dot {
             float: left;
 
@@ -22,12 +33,12 @@
             margin: 1px;
             width: 30px;
             height: 30px;
-            background-color: #dbdbdb;
+            background-color: #000;
             border-radius: 8px;
         }
 
         .stage .line span.active {
-            background-color: black;
+            background-color: #ccc;
         }
 
     </style>

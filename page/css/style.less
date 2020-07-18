@@ -1,0 +1,92 @@
+body {
+    background-color: #f5f5f5;
+}
+a{
+    color: rgb(54, 54, 54);
+    // transition: all 0.3s;
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(40, 40, 206);
+}
+
+.welcome {
+    padding: 100px 0;
+    background-color: #ddd;
+    // background-image: linear-gradient(45deg, #ffc3d7, #fffaca);
+    h1 {
+        font-size: 48px;
+        text-align: center;
+    }
+}
+
+section {
+    margin: 50px 0;
+    // padding: 20px 0;
+    .part-title {
+        text-align: center;
+        font-size: 38px;
+        font-weight: bold;
+        color: #333;
+        background-color: #cecece;
+        border-radius: 10px;
+        padding: 5px 0;
+        margin: 15px 0;
+    }
+    .item-box {
+        background-color: #fcfcfc;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 25px 40px;
+        box-shadow: 1px 1px 10px 0px #eee;
+        transition: all 0.3s;
+        @media (min-width: 768px) {
+            margin: 20px 10px;
+        }
+
+        .item-top {
+            height: 300px;
+            background-color: slateblue;
+            overflow: hidden;
+            background-position: center;
+            background-size: cover;
+            @media (min-width: 768px) {
+                height: 200px;
+            }
+        }
+
+        .item-title {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        &:hover {
+            transform: scale(1.07);
+            box-shadow: 2px 2px 10px 10px #e3e3e3;
+        }
+    }
+
+    &.part-js {
+        .row {
+            div[class^="col"] {
+                &:nth-child(1) {
+                    .item-top {
+                        background-image: url(../img/js-fjdz.jpg);
+                    }
+                }
+                &:nth-child(2) {
+                    .item-top {
+                        background-image: url(../img/js-gdsz.jpg);
+                    }
+                }
+                &:nth-child(3) {
+                    .item-top {
+                        background-image: url(../img/js-gdsz.jpg);
+                    }
+                }
+            }
+        }
+    }
+}

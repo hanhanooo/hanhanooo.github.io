@@ -178,6 +178,11 @@ a:hover {
   border: 2px solid #fff;
   color: #fff;
   font-size: 14px;
+  transition: all 0.3s;
+}
+.banner .carousel .carousel-inner .item .info-box .btn a:hover {
+  background-color: #fff;
+  color: #000;
 }
 .banner .carousel .carousel-inner li:nth-child(1) {
   background: url(../images/2.jpg) no-repeat center;
