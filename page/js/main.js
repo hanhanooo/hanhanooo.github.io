@@ -24,6 +24,11 @@ var jsData = [
         itemPic: "js-sfq.jpg",
         itemUrl: "../../JavaScript/手风琴/手风琴.html",
     },
+    {
+        itemName: "数字拼图",
+        itemPic: "js-szpt.jpg",
+        itemUrl: "../../JavaScript/数字拼图/数字拼图.html",
+    },
 ];
 
 var bsData = [

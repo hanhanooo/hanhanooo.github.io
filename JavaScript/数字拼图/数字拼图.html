@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html {
+                height: 100%;
+            }
+            body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .stage {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container {
+                width: 300px;
+                height: 300px;
+                border: 20px solid #6495ed;
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0;
+                position: relative;
+                border-radius: 10px;
+            }
+            .container li {
+                width: 100px;
+                height: 100px;
+                background-color: lightcoral;
+                box-sizing: border-box;
+                border: 2px solid #fff;
+                border-radius: 5px;
+                text-align: center;
+                line-height: 100px;
+                font-size: 40px;
+                color: #000;
+                position: absolute;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            .controls {
+                width: 120px;
+                height: 300px;
+                background-color: lightgray;
+                margin: 10px;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+            }
+            .controls button {
+                display: inline-block;
+                border: none;
+                background-color: rgb(228, 56, 56);
+                color: white;
+                font-size: 20px;
+                border-radius: 5px;
+                padding: 5px 20px;
+                font-weight: bold;
+                margin: 5px;
+                outline: none;
+            }
+            .controls button:hover {
+                background-color: white;
+                color: tomato;
+            }
+            .controls div {
+                background-color: lightseagreen;
+                color: rgb(255, 255, 255);
+                font-size: 20px;
+                border-radius: 5px;
+                padding: 5px 5px;
+                margin: 10px 5px;
+                font-size: 18px;
+            }
+            .controls div span {
+                display: block;
+                font-size: 20px;
+                font-weight: 600;
+            }
+            .rankingList {
+                width: 180px;
+                height: 300px;
+                background-color: lightgrey;
+                margin: 10px;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+            }
+            .rankingList h3 {
+                color: white;
+                background-color: rgb(228, 56, 56);
+                padding: 5px 20px;
+                margin: 5px;
+                border-radius: 5px;
+            }
+            .rankingList ul {
+                padding: 0;
+                list-style: none;
+            }
+            .rankingList ul li {
+                font-size: 20px;
+                color: #000;
+                border-radius: 5px;
+                padding: 5px 0;
+            }
+            .rankingList ul li i {
+                font-weight: bold;
+                font-size: 28px;
+            }
+            .rankingList ul li u {
+                text-decoration: none;
+                padding: 0 15px;
+            }
+            .rankingList ul li b {
+                font-size: 28px;
+                color: tomato;
+            }
+            .rankingList ul li:nth-child(odd) {
+                background-color: rgb(248, 248, 248);
+            }
+            .rankingList ul li:nth-child(even) {
+                background-color: rgb(231, 231, 231);
+            }
+            .rankingList ul li:nth-child(1) i{
+                color: rgb(182, 0, 0);
+            }
+            .rankingList ul li:nth-child(2) i{
+                color: rgb(0, 104, 190);
+            }
+            .rankingList ul li:nth-child(3) i{
+                color: rgb(24, 209, 0);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stage">
+            <!-- <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li> -->
+            <!-- <li>0</li> -->
+
+            <ul class="container"></ul>
+            <div class="controls">
+                <button class="startGame">开始</button>
+                <!-- <button class="restart">重来</button> -->
+                <div class="step">
+                    步数
+                    <span>0</span>
+                </div>
+                <div class="timer">
+                    时间
+                    <span>00:00:00</span>
+                </div>
+                <div class="state">
+                    状态
+                    <span>未开始</span>
+                </div>
+            </div>
+            <div class="rankingList">
+                <h3>排行榜丨步数</h3>
+                <ul></ul>
+            </div>
+        </div>
+
+        <script>
+            var container = document.querySelector(".container");
+            var startGame = document.querySelector(".startGame");
+            var step = document.querySelector(".step span");
+            var timer = document.querySelector(".timer span");
+            var state = document.querySelector(".state span");
+            var rankingList = document.querySelector(".rankingList ul");
+
+            var size = 3;
+            var playing = false;
+            var empty;
+            var stepCount = 0;
+            var d = 0;
+            var t;
+
+            for (var i = 0; i < size * size - 1; i++) {
+                var node = document.createElement("li");
+                node.innerText = i + 1;
+                // node.setAttribute("id",i+1);
+                node.style.left = (i % size) * 100 + "px";
+                node.style.top = parseInt(i / size) * 100 + "px";
+
+                container.appendChild(node);
+            }
+            updateRanking();
+
+            var cards = container.querySelectorAll("li");
+
+            // 洗牌
+            function shuffle() {
+                var arr = [],
+                    tmp = [];
+                for (var i = 0; i < size * size; i++) {
+                    arr.push(i);
+                }
+
+                for (var i = 0; i < size * size; i++) {
+                    tmp.push(
+                        arr.splice(Math.floor(Math.random() * arr.length), 1)[0]
+                        // arr[i]
+                    );
+                }
+
+                cards.forEach(function (element, index) {
+                    element.style.left = (tmp[index] % size) * 100 + "px";
+                    element.style.top =
+                        parseInt(tmp[index] / size) * 100 + "px";
+                    element.dataset.index = tmp[index];
+                });
+
+                // console.log(tmp);
+                // console.log(tmp[tmp.length-1]);
+                return tmp[tmp.length - 1];
+            }
+
+            cards.forEach(function (element, index) {
+                element.addEventListener("click", function () {
+                    if (!playing) {
+                        return;
+                    }
+
+                    // 先计算点击的卡片与空白的绝对值
+                    var empty_left = (empty % size) * 100;
+                    var empty_top = parseInt(empty / size) * 100;
+                    var left = parseInt(this.style.left);
+                    var top = parseInt(this.style.top);
+
+                    if (
+                        (Math.abs(left - empty_left) == 100 &&
+                            Math.abs(top - empty_top) == 0) ||
+                        (Math.abs(left - empty_left) == 0 &&
+                            Math.abs(top - empty_top) == 100)
+                    ) {
+                        // 交换位置
+                        var tmp = empty;
+                        empty = this.dataset.index;
+                        this.dataset.index = tmp;
+                        this.style.left = empty_left + "px";
+                        this.style.top = empty_top + "px";
+
+                        // 更新步数
+                        // stepCount ++;
+                        step.innerText = ++stepCount;
+
+                        // 判断结果
+                        // console.log(cards)
+                        var result = Array.prototype.every.call(
+                            cards,
+                            function (element, index) {
+                                return element.dataset.index == index;
+                            }
+                        );
+                        console.log(result);
+
+                        if (result) {
+                            console.log("yes");
+                            clearInterval(t);
+                            playing = false;
+                            state.innerText = "成功";
+
+                            // 数据存储
+                            var data = JSON.parse(
+                                localStorage.getItem("scores")
+                            );
+                            if (!data) {
+                                data = [];
+                            }
+                            var newScore = {
+                                step: stepCount,
+                                timer: d,
+                            };
+                            data.push(newScore);
+                            var dataStr = JSON.stringify(data);
+
+                            localStorage.setItem("scores", dataStr);
+                            updateRanking();
+
+                            setTimeout(function () {
+                                alert("成功");
+                            }, 300);
+                        }
+                    }
+                });
+            });
+
+            // 开始按钮
+            startGame.addEventListener("click", function () {
+                playing = true;
+                state.innerText = "游戏中";
+                startGame.innerText = "重来";
+                stepCount = 0;
+                step.innerText = 0;
+                empty = shuffle();
+                if (t) {
+                    clearInterval(t);
+                    timer.innerText = "00:00:00";
+                }
+                d = 0;
+                t = setInterval(function () {
+                    d += 1000;
+                    // var s = parseInt((d / 1000) % 60);
+                    // var m = parseInt((d / 1000 / 60) % 60);
+                    // var h = parseInt(d / 1000 / 60 / 60);
+                    // console.log(h, m, s);
+                    timer.innerText = setTimeFormat(d);
+                        // bulin(h) + ":" + bulin(m) + ":" + bulin(s);
+                }, 1000);
+            });
+
+            // 补零
+            function bulin(n) {
+                if (parseInt(n / 10) == 0) {
+                    return "0" + n;
+                } else {
+                    return n;
+                }
+            }
+
+            // 更新排行榜
+            function updateRanking() {
+                var data = JSON.parse(localStorage.getItem("scores"));
+                if (!data) {
+                    data = [];
+                }
+                rankingList.innerHTML = "";
+                data.sort(function (a, b) {
+                    return a.timer - b.timer;
+                    // return b.step - a.step;
+                });
+                data.sort(function (a, b) {
+                    return a.step - b.step;
+                    // return b.step - a.step;
+                });
+
+                data.forEach(function (element, index) {
+                    if (index >= 5) {
+                        return;
+                    }
+                    var node = document.createElement("li");
+                    // console.log(element)
+                    // node.innerText = index + element.timer + element.step;
+                    node.innerHTML =
+                        "<i>" +
+                        (index + 1) +
+                        "</i><u>" +
+                        setTimeFormat(element.timer) +
+                        "<u/><b>" +
+                        element.step +
+                        "<b/>";
+                    rankingList.appendChild(node);
+                });
+            }
+
+            // 设置时间格式
+            function setTimeFormat(x) {
+                var s = parseInt((x / 1000) % 60);
+                var m = parseInt((x / 1000 / 60) % 60);
+                var h = parseInt(x / 1000 / 60 / 60);
+
+                return bulin(h) + ":" + bulin(m) + ":" + bulin(s);
+            }
+        </script>
+    </body>
+</html>
