@@ -58,7 +58,11 @@ var c3Data = [
 ]
 
 var h5Data = [
-
+    {
+        itemName: "拖放拼图",
+        itemPic: "h5-tfpt.jpg",
+        itemUrl: "../../H5/拖放拼图/拖放拼图.html",
+    },
 ]
 
 var part_js_row = document.querySelector(".part-js").querySelector(".row");

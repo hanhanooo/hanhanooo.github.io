@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* flex-wrap: wrap; */
+                /* align-content: center; */
+                flex-direction: column;
+            }
+            .stage {
+                width: 400px;
+                height: 400px;
+                /* background: cornflowerblue; */
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                border: 20px solid rgb(95, 122, 212);
+                border-radius: 5px;
+            }
+            .stage li {
+                background-color: pink;
+                list-style: none;
+                border-radius: 5px;
+                box-sizing: border-box;
+                border: 2px solid white;
+                background-image: url(./img/jq22.jpg);
+                background-size: 300% auto;
+                transition: all 0.3s;
+                position: absolute;
+            }
+
+            .control {
+                margin-top: 10px;
+                padding: 10px;
+                background-color: lightsteelblue;
+                border-radius: 5px;
+            }
+            .control button{
+                font-size: 16px;
+                border: none;
+                background-color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin: 0 10px;
+                outline: none;
+            }
+            .control button:hover{
+                color: white;
+                background-color: rgb(95, 122, 212);
+            }
+            .control select{
+                font-size: 16px;
+                border: none;
+                background-color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin: 0 5px;
+            }
+            .control input{
+                font-size: 16px;
+                border: none;
+                background-color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin: 0 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="stage"></ul>
+        <div class="control">
+            <button class="start">开始</button>
+            <select name="" id="size">
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <input type="file" name="" id="uploadImg" />
+        </div>
+
+        <script>
+            var stage = document.querySelector(".stage");
+            var sizeDom = document.querySelector("#size");
+
+            var size = 3;
+
+            function createCards() {
+                stage.innerHTML ="";
+                for (var i = 0; i < size * size; i++) {
+                var li = document.createElement("li");
+
+                li.style.width = 100 / size + "%";
+                li.style.height = 100 / size + "%";
+
+                li.style.backgroundSize = size * 100 + "% auto";
+
+                li.style.backgroundPosition =
+                    (i % size) * -100 +
+                    "% " +
+                    Math.floor(i / size) * -100 +
+                    "%";
+                li.style.left = (100 / size) * (i % size) + "%";
+                li.style.top = (100 / size) * Math.floor(i / size) + "%";
+
+                li.id = "card" + i;
+                li.draggable = true;
+                li.ondragstart = function (event) {
+                    event.dataTransfer.setData("text", event.target.id);
+                };
+
+                li.ondragover = function (event) {
+                    event.preventDefault();
+                };
+                li.ondrop = function (event) {
+                    var e1 = document.getElementById(
+                        event.dataTransfer.getData("text")
+                    );
+                    var e2 = event.target;
+
+                    // console.log(e1, e2);
+
+                    var tmpleft = e1.style.left;
+                    var tmptop = e1.style.top;
+
+                    e1.style.left = e2.style.left;
+                    e1.style.top = e2.style.top;
+
+                    e2.style.left = tmpleft;
+                    e2.style.top = tmptop;
+
+                    checkSuccess();
+                };
+
+                stage.appendChild(li);
+            }
+                cards = document.querySelectorAll("li");
+            }
+
+            for (var i = 0; i < size * size; i++) {
+                var li = document.createElement("li");
+
+                li.style.width = 100 / size + "%";
+                li.style.height = 100 / size + "%";
+
+                li.style.backgroundSize = size * 100 + "% auto";
+
+                li.style.backgroundPosition =
+                    (i % size) * -100 +
+                    "% " +
+                    Math.floor(i / size) * -100 +
+                    "%";
+                li.style.left = (100 / size) * (i % size) + "%";
+                li.style.top = (100 / size) * Math.floor(i / size) + "%";
+
+                li.id = "card" + i;
+                li.draggable = true;
+                li.ondragstart = function (event) {
+                    event.dataTransfer.setData("text", event.target.id);
+                };
+
+                li.ondragover = function (event) {
+                    event.preventDefault();
+                };
+                li.ondrop = function (event) {
+                    var e1 = document.getElementById(
+                        event.dataTransfer.getData("text")
+                    );
+                    var e2 = event.target;
+
+                    // console.log(e1, e2);
+
+                    var tmpleft = e1.style.left;
+                    var tmptop = e1.style.top;
+
+                    e1.style.left = e2.style.left;
+                    e1.style.top = e2.style.top;
+
+                    e2.style.left = tmpleft;
+                    e2.style.top = tmptop;
+
+                    checkSuccess();
+                };
+
+                stage.appendChild(li);
+            }
+
+            var cards = document.querySelectorAll("li");
+
+            // 洗牌
+            function shuffle() {
+                var arr = [];
+                for (var i = 0; i < size * size; i++) {
+                    arr.push(i);
+                }
+                var tmp = [];
+
+                for (var i = 0; i < size * size; i++) {
+                    tmp.push(
+                        arr.splice(Math.floor(Math.random() * arr.length), 1)[0]
+                    );
+                }
+                //  console.log(tmp);
+
+                cards.forEach(function (element, index) {
+                    element.style.left =
+                        (100 / size) * (tmp[index] % size) + "%";
+                    element.style.top =
+                        (100 / size) * Math.floor(tmp[index] / size) + "%";
+                });
+            }
+
+            // 检验结果
+            function checkSuccess() {
+                var x = Array.prototype.every.call(cards, function (
+                    element,
+                    index
+                ) {
+                    // console.log(parseInt(element.style.left));
+                    // console.log(parseInt((100 / size) * (index % size)));
+                    // console.log(element.style.top);
+                    // console.log(index)
+
+                    return (
+                        parseInt(element.style.left) ==
+                            parseInt((100 / size) * (index % size)) &&
+                        parseInt(element.style.top) ==
+                            parseInt((100 / size) * Math.floor(index / size))
+                    );
+                });
+
+                // console.log(x);
+                if (x == true) {
+                    console.log("成功");
+                    setTimeout(function () {
+                        alert("成功");
+                    }, 1000);
+                }
+            }
+
+            var start = document.querySelector(".start");
+            var uploadImg = document.querySelector("#uploadImg");
+
+            start.addEventListener("click", function () {
+                shuffle();
+            });
+
+            uploadImg.addEventListener("change", function () {
+                //  console.log(this.files[0])
+                var reader = new FileReader();
+                // console.log(reader)
+                reader.readAsDataURL(this.files[0]);
+                // console.log(reader)
+                reader.onload = function (event) {
+                    // console.log(this.result)
+                    var imgUrl = this.result;
+                    cards.forEach(function (element) {
+                        element.style.backgroundImage = "url(" + imgUrl + ")";
+                    });
+                };
+            });
+
+            sizeDom.addEventListener("change",function () { 
+                size = this.value;
+                createCards();
+             })
+        </script>
+    </body>
+</html>
