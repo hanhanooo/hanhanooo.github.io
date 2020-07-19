@@ -29,6 +29,11 @@ var jsData = [
         itemPic: "js-szpt.jpg",
         itemUrl: "../../JavaScript/数字拼图/数字拼图.html",
     },
+    {
+        itemName: "抽奖",
+        itemPic: "js-cj.jpg",
+        itemUrl: "../../JavaScript/抽奖/抽奖.html",
+    },
 ];
 
 var bsData = [

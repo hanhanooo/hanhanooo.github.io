@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul {
+            position: relative;
+            margin: 0 auto;
+            padding: 0;
+            width: 340px;
+            height: 340px;
+            background-color: #f4f4f4;
+            list-style: none;
+            /* border: 10px solid rgb(88, 88, 230); */
+            background-color: rgb(236, 236, 236);
+        }
+
+        li {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: skyblue;
+            border-radius: 10px;
+        }
+
+        li.active {
+            background-color: tomato;
+        }
+
+        li:nth-child(1) {
+            left: 0;
+            top: 0;
+        }
+
+        li:nth-child(2) {
+            left: 120px;
+            top: 0;
+        }
+
+        li:nth-child(3) {
+            left: 240px;
+            top: 0;
+        }
+
+        li:nth-child(4) {
+            left: 240px;
+            top: 120px;
+        }
+
+        li:nth-child(5) {
+            left: 240px;
+            top: 240px;
+        }
+
+        li:nth-child(6) {
+            left: 120px;
+            top: 240px;
+        }
+
+        li:nth-child(7) {
+            left: 0;
+            top: 240px;
+        }
+
+        li:nth-child(8) {
+            left: 0;
+            top: 120px;
+        }
+
+        button {
+            position: absolute;
+            left: 120px;
+            top: 120px;
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 10px;
+            background-color: red;
+            color: #fff;
+            font-size: 20px;
+            outline: none;
+        }
+
+        #result {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <ul>
+            <li>谢谢参与</li>
+            <li>5元红包</li>
+            <li>谢谢参与</li>
+            <li>精美马克杯</li>
+            <li>谢谢参与</li>
+            <li>视频会员周卡</li>
+            <li>谢谢参与</li>
+            <li>1元Q币</li>
+            <button>点击<br>抽奖</button>
+        </ul>
+        <div id="result">抽奖结果：???</div>
+    </div>
+
+    <script>
+        var lis = document.getElementsByTagName("li");
+        var btn = document.getElementsByTagName("button")[0];
+        var result = document.getElementById("result");
+        var current = -1;
+        var canClick = true;
+
+        btn.onclick = function () {
+            if (canClick) {
+                canClick = false;
+                result.innerText = "抽奖结果：???";
+                //生成随机数
+                var randomNum = Math.floor(Math.random() * lis.length);
+                console.log("中奖号为", randomNum);
+                var targetNum = randomNum + lis.length * 5;
+                console.log("目标号码", targetNum);
+
+                updateView(200);
+            }
+
+            function updateView(ms) {
+                // 计时器
+                var id = setInterval(function () {
+                    current++;
+
+                    for (var i = 0; i < lis.length; i++) {
+                        if (i == current % lis.length) {
+                            lis[i].classList.add("active");
+                        } else {
+                            lis[i].classList.remove("active");
+                        }
+                    }
+                    // console.log(current)
+                    if (current == lis.length * 1) {
+                        clearInterval(id);
+                        updateView(100);
+                    }
+                    if (current == lis.length * 2) {
+                        clearInterval(id);
+                        updateView(50);
+                    }
+                    if (current == lis.length * 3) {
+                        clearInterval(id);
+                        updateView(100);
+                    }
+                    if (current == lis.length * 4) {
+                        clearInterval(id);
+                        updateView(200);
+                    }
+                    // 到达目标点 清除计时器
+                    if (current == targetNum) {
+                        clearInterval(id);
+                        current = randomNum;
+                        canClick = true;
+                        result.innerText = "抽奖结果：" + lis[randomNum].innerText;
+                    }
+
+                }, ms);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
