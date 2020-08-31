@@ -16,6 +16,12 @@ a:hover {
   font-size: 48px;
   text-align: center;
 }
+.welcome h3 {
+  font-size: 20px;
+  text-align: center;
+  padding-top: 10px;
+  font-weight: bold;
+}
 section {
   margin: 50px 0;
 }
@@ -44,7 +50,7 @@ section .item-box {
 }
 section .item-box .item-top {
   height: 300px;
-  background-color: slateblue;
+  background-color: #f4f4f4;
   overflow: hidden;
   background-position: center;
   background-size: cover;

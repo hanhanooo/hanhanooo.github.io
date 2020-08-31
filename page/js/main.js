@@ -70,10 +70,19 @@ var h5Data = [
     },
 ]
 
+var vueData = [
+    {
+        itemName: "咖啡商城",
+        itemPic: "vue-coffee.jpg",
+        itemUrl: "../../vue/coffee/dist/index.html",
+    },
+]
+
 var part_js_row = document.querySelector(".part-js").querySelector(".row");
 var part_bs_row = document.querySelector(".part-bs").querySelector(".row");
 var part_c3_row = document.querySelector(".part-c3").querySelector(".row");
 var part_h5_row = document.querySelector(".part-h5").querySelector(".row");
+var part_vue_row = document.querySelector(".part-vue").querySelector(".row");
 
 
 function createItem(partData,partRowDom) { 
@@ -116,3 +125,4 @@ function createItem(partData,partRowDom) {
  createItem(bsData,part_bs_row);
  createItem(c3Data,part_c3_row);
  createItem(h5Data,part_h5_row);
+ createItem(vueData,part_vue_row);
