@@ -74,7 +74,7 @@ var vueData = [
     {
         itemName: "咖啡商城",
         itemPic: "vue-coffee.jpg",
-        itemUrl: "../../vue/coffee/dist/index.html",
+        itemUrl: "../../Vue/coffee/dist/index.html",
     },
 ]
 
